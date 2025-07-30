@@ -157,7 +157,7 @@ async function uploadToArweave(fileId: string): Promise<ArweaveUploadResponse> {
 async function processNewFile(file: TelegramFile): Promise<string> {
   try {
     // 1. Get upload cost
-    const costResponse = await getUploadCost(file.id);
+          await getUploadCost(file.id); // Check cost but don't store response
 
     // 2. Upload to Arweave
     const uploadResponse = await uploadToArweave(file.id);
