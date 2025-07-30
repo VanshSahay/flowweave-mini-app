@@ -5,6 +5,7 @@ import { Button } from "./components/DemoComponents";
 import { motion, AnimatePresence } from "framer-motion";
 import Image from "next/image";
 import { startUploadProcess } from "../lib/arweave-client";
+import { sdk } from '@farcaster/miniapp-sdk';
 
 type Message = {
   id: string;
@@ -40,6 +41,19 @@ export default function App() {
   useEffect(() => {
     scrollToBottom();
   }, [messages]);
+
+  // Call sdk.actions.ready() when the app is loaded
+  useEffect(() => {
+    const initApp = async () => {
+      try {
+        await sdk.actions.ready();
+      } catch (error) {
+        console.error('Failed to initialize Farcaster Mini App:', error);
+      }
+    };
+    
+    initApp();
+  }, []);
 
   const clearImageSelection = () => {
     setSelectedImage(null);
