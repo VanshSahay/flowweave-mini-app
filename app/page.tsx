@@ -3,6 +3,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Button } from "./components/DemoComponents";
 import { motion, AnimatePresence } from "framer-motion";
+import Image from "next/image";
 import { startUploadProcess } from "../lib/arweave-client";
 
 type Message = {
@@ -245,7 +246,7 @@ export default function App() {
               delay: 0.7
             }}
           >
-            Create automations that don't 404.
+            Create automations that don&apos;t 404.
           </motion.p>
         </div>
       </motion.div>
@@ -314,12 +315,15 @@ export default function App() {
               >
                 {message.type === "image" && message.imageUrl && (
                   <div className="mb-2 relative">
-                    <img
+                    <Image
                       src={message.imageUrl}
                       alt="Shared image"
-                      className={`rounded-lg max-w-full h-auto ${
+                      width={500}
+                      height={300}
+                      className={`rounded-lg w-full h-auto ${
                         message.status === "uploading" ? "opacity-50" : ""
                       }`}
+                      unoptimized // For dynamic URLs
                     />
                     {message.status === "uploading" && (
                       <div className="absolute inset-0 flex items-center justify-center">
@@ -353,15 +357,15 @@ export default function App() {
                               >
                                 View on Arweave
                               </a>
-                              <img 
+                              <Image 
                                 src={part}
                                 alt="Arweave content"
-                                className="mt-2 rounded-lg max-w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
+                                width={500}
+                                height={300}
+                                className="mt-2 rounded-lg w-full h-auto cursor-pointer hover:opacity-90 transition-opacity"
                                 onClick={() => window.open(part, '_blank')}
-                                onError={(e) => {
-                                  // Hide image if it fails to load
-                                  (e.target as HTMLImageElement).style.display = 'none';
-                                }}
+                                onError={() => "hidden"}
+                                unoptimized // For external URLs
                               />
                             </div>
                           );
@@ -401,10 +405,13 @@ export default function App() {
       <div className="border-t border-[var(--border)] bg-[var(--bubble-system)] backdrop-blur-sm p-4">
         {imagePreview && (
           <div className="mb-4 relative">
-            <img
-              src={imagePreview}
+            <Image
+              src={imagePreview || ""}
               alt="Selected image"
+              width={500}
+              height={300}
               className="max-h-48 rounded-lg object-contain bg-[var(--app-gray)]"
+              unoptimized // For blob URLs
             />
             <button
               onClick={clearImageSelection}
