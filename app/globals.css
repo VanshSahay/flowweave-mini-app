@@ -1,0 +1,63 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  /* Base colors */
+  --background: #0F0F0F;
+  --foreground: #FFFFFF;
+  
+  /* UI Elements */
+  --primary: #3B82F6;
+  --primary-hover: #2563EB;
+  --primary-light: rgba(59, 130, 246, 0.1);
+  
+  /* Chat bubbles */
+  --bubble-user: rgba(59, 130, 246, 0.9);
+  --bubble-other: rgba(31, 41, 55, 0.85);
+  --bubble-system: rgba(55, 65, 81, 0.85);
+  
+  /* Text colors */
+  --text-primary: #FFFFFF;
+  --text-secondary: #9CA3AF;
+  --text-muted: #6B7280;
+  
+  /* Status colors */
+  --success: #10B981;
+  --error: #EF4444;
+  --warning: #F59E0B;
+  
+  /* Borders and shadows */
+  --border: #374151;
+  --shadow: rgba(0, 0, 0, 0.1);
+}
+
+body {
+  color: var(--foreground);
+  background: var(--background);
+  font-family: 'Bitcount Prop Single', monospace;
+  font-optical-sizing: auto;
+  font-weight: 400;
+  font-style: normal;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* Adjust font weights for better readability */
+h1, h2, h3, h4, h5, h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+}
+
+/* Make chat messages slightly lighter for better readability */
+.message-text {
+  font-weight: 300;
+  letter-spacing: 0.01em;
+  font-size: 1.2em;
+}
+
+/* Make system messages and links bolder */
+.system-message, a {
+  font-weight: 300;
+}
